@@ -1,5 +1,4 @@
 import discord
-import configparse
 from discord.ext import commands
 from load import load_conf
 
@@ -47,3 +46,5 @@ class Hal(commands.Bot):
     async def on_message(self, msg):
         if not msg.author.bot:
             await self.process_commands(msg)
+bot = Hal()
+bot.run()
