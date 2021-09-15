@@ -1,6 +1,7 @@
 import discord
 import configparser
 from discord.ext import commands
+from pathlib import Path
 
 class Hal(commands.Bot):
     """
@@ -13,6 +14,7 @@ class Hal(commands.Bot):
       On init cogs are loaded  from ./cogs dir. and 
       config loaded as well. super() initialization done 
       """
+      self._cogs = [p.stem for p in Path(".").glob("../cogs/*.py")]
       self.load_config()    
       super().__init__(command_prefix=self.prefix, case_insensitive=True)
 
@@ -24,7 +26,12 @@ class Hal(commands.Bot):
       cfg = configparser.ConfigParser()
       cfg.read("../dontneedit.ini")
       self._conf["TOKEN"] = cfg["Discord"]["TOKEN"]
-      
+    
+    def setup(self):
+      for cog in self._cogs:
+
+
+
     def run(self):
       """
       Loads conf then runs the bot

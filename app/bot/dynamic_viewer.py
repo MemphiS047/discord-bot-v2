@@ -9,4 +9,4 @@ class LolCogs(commands.Cogs):
   async def lolbuild_command(self, ctx):
     channel = ctx.message.channel
     messages = await channel.history(limit=1).flatten()
-    
+    print(messages)
