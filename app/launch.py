@@ -1,4 +1,4 @@
-from bot.bot import Hal
+from bot import Hal
 
 def main():
   hal = Hal()

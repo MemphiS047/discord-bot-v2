@@ -2,6 +2,7 @@ import discord
 import configparser
 from discord.ext import commands
 from pathlib import Path
+from cogs.test import Greetings
 
 class Hal(commands.Bot):
     """
@@ -14,8 +15,6 @@ class Hal(commands.Bot):
       On init cogs are loaded  from ./cogs dir. and 
       config loaded as well. super() initialization done 
       """
-      self._cogs = [p.stem for p in Path(".").glob("./../cogs/*.py")]
-      print("cogs - ",self._cogs)
       self.load_config()    
       self.setup()
       super().__init__(command_prefix=self.prefix, case_insensitive=True)
@@ -30,10 +29,10 @@ class Hal(commands.Bot):
       self._conf["TOKEN"] = cfg["Discord"]["TOKEN"]
     
     def setup(self):
-      print("Loading cogs...")
-      for cog in self._cogs:
-        self.load_extension(f"bot.cogs.{cog}")
-        print(f"Loaded `{cog}` cog.")
+      """
+      Loads cogs to bot
+      """
+      self.load_extension("cogs.test")
 
     def run(self):
       """
@@ -61,7 +60,7 @@ class Hal(commands.Bot):
       """
       Information about connection trigered on connection
       """
-      print(f"Connected to Discord (latency: {self.latency*1000:,.0f} ms.)")
+      print(f"\n\nConnected to Discord (latency: {self.latency*1000:,.0f} ms.)")
     
     async def on_resume(self):
       """
@@ -74,14 +73,13 @@ class Hal(commands.Bot):
       Fired on bot disconnect print message about status
       """
       print("Bot disconnect.")
-
+    
     async def on_ready(self):
       """
       On Bot ready this function fires with intializing
       client id to self
       """
-      self.client_id = (await self.application_info()).id
-      print(f"Bot ready. {self.client_id}")
+      print(f'Logged in as: {self.user.name} - {self.user.id}\nVersion: {discord.__version__}\n')
 
     async def prefix(self, bot, msg): 
       """

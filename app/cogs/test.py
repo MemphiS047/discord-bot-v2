@@ -1,3 +1,6 @@
+from discord.ext import commands
+import discord
+
 class Greetings(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -20,4 +23,4 @@ class Greetings(commands.Cog):
         self._last_member = member
 
 def setup(bot):
-  bot.add_cog(Greetings(bot))
+    bot.add_cog(Greetings(bot))
