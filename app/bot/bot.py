@@ -14,8 +14,10 @@ class Hal(commands.Bot):
       On init cogs are loaded  from ./cogs dir. and 
       config loaded as well. super() initialization done 
       """
-      self._cogs = [p.stem for p in Path(".").glob("../cogs/*.py")]
+      self._cogs = [p.stem for p in Path(".").glob("./../cogs/*.py")]
+      print("cogs - ",self._cogs)
       self.load_config()    
+      self.setup()
       super().__init__(command_prefix=self.prefix, case_insensitive=True)
 
     def load_config(self):
@@ -28,9 +30,10 @@ class Hal(commands.Bot):
       self._conf["TOKEN"] = cfg["Discord"]["TOKEN"]
     
     def setup(self):
+      print("Loading cogs...")
       for cog in self._cogs:
-
-
+        self.load_extension(f"bot.cogs.{cog}")
+        print(f"Loaded `{cog}` cog.")
 
     def run(self):
       """
@@ -94,3 +97,4 @@ class Hal(commands.Bot):
     async def on_message(self, msg):
       if not msg.author.bot:
           await self.process_commands(msg)
+          print(msg.content)
