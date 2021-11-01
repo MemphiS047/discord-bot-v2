@@ -7,4 +7,4 @@ User Based Customization
 Some Game Help Services (LOL, Albion etc.)
 Exchange, Stock Price etc.
 ### About
-This bot provides user various services such as daily news from global journles and newsletters. Weather forecasting information, Wikipedia and Game Help Serivce.2
+This bot provides user various services such as daily news from global journles and newsletters. Weather forecasting information, Wikipedia and Game Help Serivce.3
